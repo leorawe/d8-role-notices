@@ -1,0 +1,14 @@
+lw_role_notices.settings_form:
+  path: '/admin/people/lw_role_notices'
+  defaults:
+    _form: 'Drupal\lw_role_notices\Form\RoleNoticesSettingsForm'
+  requirements:
+      _permission: 'administer role notices'
+
+lw_role_notices.hithere:
+  path: '/admin/reports/lw_role_notices'
+  defaults:
+    _controller: '\Drupal\lw_role_notices\Controller\RoleNoticesController::page'
+    _title: 'Test Title'
+  requirements:
+    _permission: 'administer role notices'

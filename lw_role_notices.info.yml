@@ -1,0 +1,7 @@
+name: LW Role Notices Module
+description: 'based on video by Ted Bowman'
+type: module
+core: '8.x'
+package: LW
+dependencies:
+  - drupal:block

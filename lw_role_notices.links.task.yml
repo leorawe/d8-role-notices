@@ -1,0 +1,6 @@
+lw_role_notices.settings_form:
+  title: 'LW Role Notices'
+  route_name: lw_role_notices.settings_form
+  base_route: entity.user.collection
+  weight: 15
+  

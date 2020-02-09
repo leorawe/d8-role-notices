@@ -1,0 +1,5 @@
+lw_role_notices.hithere:
+  title: 'LW Role Notices - Hi, Peeps'
+  description: 'Hello World type of menu link to a page with markup'
+  route_name: lw_role_notices.hithere
+  parent: system.admin_reports
