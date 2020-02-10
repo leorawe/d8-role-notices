@@ -20,12 +20,23 @@ class RoleNoticesSettingsForm extends FormBase{
    */
   public function buildForm(array $form, FormStateInterface $form_state)
   {
-    $form['notice'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('Notice'),
-      '#description' => $this->t('Add a notice'),
-      '#default_value'=> \Drupal::service('state')->get('lw_role_notice.test'),
+    $role_names = user_role_names(TRUE);
+    /*
+    * Using an empty container will make our values come back as an array
+    */
+    $form['notices'] = [
+      '#tree' => TRUE,
     ];
+    $notices = \Drupal::state()->get('role_notices.notices', []);
+    // Create 1 text area for each role
+    foreach ($role_names as $role_id => $role_name){
+        $form['notices'][$role_id] = [
+          '#type' => 'textarea',
+          '#title' => $role_name,
+          '#description' => $this->t('Add a notice for the <strong>@role</strong>', ['@role' => $role_name]),
+          '#default_value'=> isset($notices[$role_id])? $notices[$role_id]:'',
+        ];
+      }
     $form['actions'] = ['#type' => 'actions'];
     $form['actions']['submit'] = [
       '#type' => 'submit',
@@ -38,8 +49,8 @@ class RoleNoticesSettingsForm extends FormBase{
    * (@inheritDoc)
    */
   public function submitForm(array &$form, FormStateInterface $form_state){
-    $notice = $form_state->getValue('notice');
-    \Drupal::state()->set('lw_role_notice.test', $notice);
-    \Drupal::messenger()->addMessage($this->t('the notices have been ah saved ah saved.'));
+    $notices = $form_state->getValue('notices');
+    \Drupal::state()->set('lw_role_notices.notices', $notices);
+    \Drupal::messenger()->addMessage($this->t('Notices have been saved.'));
   }
 }
