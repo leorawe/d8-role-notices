@@ -3,4 +3,3 @@ lw_role_notices.settings_form:
   route_name: lw_role_notices.settings_form
   base_route: entity.user.collection
   weight: 15
-  

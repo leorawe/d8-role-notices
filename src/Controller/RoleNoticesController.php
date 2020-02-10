@@ -15,7 +15,7 @@ class RoleNoticesController  {
   *
   */
   use StringTranslationTrait;
-  
+
   /**
    *
    * @return array
