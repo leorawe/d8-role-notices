@@ -3,7 +3,7 @@ lw_role_notices.settings_form:
   defaults:
     _form: 'Drupal\lw_role_notices\Form\RoleNoticesSettingsForm'
   requirements:
-      _permission: 'administer role notices'
+    _permission: 'administer role notices'
 
 lw_role_notices.hithere:
   path: '/admin/reports/lw_role_notices'

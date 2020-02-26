@@ -3,6 +3,7 @@
 namespace Drupal\lw_role_notices\Form;
 
 use Drupal\Core\Form\FormBase;
+use Drupal\role_notices\NoticesManager;
 use \Drupal\Core\Form\FormStateInterface;
 
 class RoleNoticesSettingsForm extends FormBase{
@@ -12,7 +13,7 @@ class RoleNoticesSettingsForm extends FormBase{
    */
   public function getFormId()
   {
-    return 'role_notices_setting_form';
+    return 'lw_role_notices_setting_form';
   }
 
     /**
@@ -27,7 +28,7 @@ class RoleNoticesSettingsForm extends FormBase{
     $form['notices'] = [
       '#tree' => TRUE,
     ];
-    $notices = \Drupal::state()->get('role_notices.notices', []);
+    $notices = \Drupal::state()->get('lw_role_notices.notices', []);
     // Create 1 text area for each role
     foreach ($role_names as $role_id => $role_name){
         $form['notices'][$role_id] = [
