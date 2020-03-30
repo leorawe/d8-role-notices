@@ -28,7 +28,7 @@ class RoleNoticesSettingsForm extends FormBase{
     $form['notices'] = [
       '#tree' => TRUE,
     ];
-    $notices = \Drupal::state()->get('lw_role_notices.notices', []);
+    $notices = \Drupal::service('lw_role_notices.notice_manager')->getAllNotices();
     // Create 1 text area for each role
     foreach ($role_names as $role_id => $role_name){
         $form['notices'][$role_id] = [
@@ -51,7 +51,7 @@ class RoleNoticesSettingsForm extends FormBase{
    */
   public function submitForm(array &$form, FormStateInterface $form_state){
     $notices = $form_state->getValue('notices');
-    \Drupal::state()->set('lw_role_notices.notices', $notices);
+    \Drupal::service('lw_role_notices.notice_manager')->setAllNotices($notices);
     \Drupal::messenger()->addMessage($this->t('Notices have been saved.'));
   }
 }

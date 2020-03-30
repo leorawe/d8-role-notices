@@ -1,0 +1,25 @@
+# This file registers this module's service(s).
+services:
+  # We only need 1 service to get and set our notices.
+  # Notice that we use our module machine name as the first part of our service name.
+  # This ensures we won't have a naming conflict with another module
+  lw_role_notices.notice_manager:
+    # This is the class that our service will be.
+    # This tells the Drupal's service container which class to use for our service instance.
+    class: Drupal\lw_role_notices\NoticesManager
+    # Our service depends on other services.
+    # We declare them as arguments of our service so that the
+    # Service Container will provide them as arguments to our class's constructor.
+    arguments: ['@current_user', '@state', '@module_handler']
+    #?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?
+    # You may be wondering how you would figure out where these services are defined.
+    # Most Drupal services are declared in *.services.yml files.
+    # So for example to find out where "@current_user" is define search like this
+    # inside Drupal code base:
+    #  text: "current_user:"
+    #  file name pattern: *.services.yml
+    #
+    # Could you find these services? What classes are they?
+    # Notice that these classes match the types of the arguments to our service's
+    # constructor.
+    #?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?#?

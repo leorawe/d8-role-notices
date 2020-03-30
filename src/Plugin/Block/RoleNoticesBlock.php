@@ -32,13 +32,19 @@ class RoleNoticesBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build(){
-    $all_notices = \Drupal::state()->get('lw_role_notices.notices',[]);
-    $user_roles = \Drupal::currentUser()->getRoles();
-    $user_notices = array_intersect_key($all_notices, array_flip($user_roles));
+    //$all_notices = \Drupal::service('lw_role_notices.notice_manager')->getUserNotices();
+    $notices_manager = \Drupal::service('lw_role_notices.notice_manager');
+    //$user_roles = \Drupal::currentUser()->getRoles();
+    //$user_notices = array_intersect_key($all_notices, array_flip($user_roles));
+    $notices = $notices_manager->getUserNotices();
     return [
       '#theme' => 'item_list',
-      '#items' => $user_notices,
+      '#items' => $notices,
 //      '#markup' => 'bob',
+      '#cache' => [
+        'contexts' => ['user.roles'],
+        'tags' => $notices_manager->getRenderTags(array_keys($notices)),
+      ]
     ];
   }
 }
